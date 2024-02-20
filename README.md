@@ -1,4 +1,4 @@
-# Avirbahv
+# Avirbhav
 
 This Solidity program encapsulates the code for an event management system, where the admin and add and remove teams and the scores can be updated and
 tracked accordingly.
