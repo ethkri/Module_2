@@ -11,7 +11,7 @@ export default function HomePage() {
   const [newScore, setnewScore] = useState("");
   const [team, setTeam] = useState("");
 
-  const contractAddress = "0xc5A85Ed4674426F5AdB853c038639CfA12fbbc05";
+  const contractAddress = "0xF03E8065a7F7ddA1780103372298a3dB1f62656C";
   const atmABI = atm_abi.abi;
 
   const getWallet = async () => {

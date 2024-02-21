@@ -45,6 +45,12 @@ npm run dev
 
 to launch the front-end.
 
+The project is deployed on the mumbai polygon blockchain, on this address
+
+```
+0xF03E8065a7F7ddA1780103372298a3dB1f62656C
+```
+
 ### Authhors
 
 Kritika Joshi
