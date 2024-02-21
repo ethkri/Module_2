@@ -10,6 +10,7 @@ export default function HomePage() {
   const [newTeam, setNewTeam] = useState("");
   const [newScore, setnewScore] = useState("");
   const [team, setTeam] = useState("");
+  const [updatedScore, setUpdatedScore] = useState("");
 
   const contractAddress = "0xF03E8065a7F7ddA1780103372298a3dB1f62656C";
   const atmABI = atm_abi.abi;
@@ -62,15 +63,25 @@ export default function HomePage() {
       const _score = await atm.getScore(team, {
         from: account[0],
       });
-      setScore(_score);
-      console.log(_score);
+      setScore(_score.toString());
+      console.log(_score.toString());
     }
   };
 
   const addATeam = async () => {
     if (atm) {
       console.log(`newTeam ${newTeam}, message: ${newScore}`);
-      let tx = await atm.addATeam(newTeam, newScore, {
+      let tx = await atm.addTeam(newTeam, newScore, {
+        from: account[0],
+      });
+      await tx.wait();
+    }
+  };
+
+  const updateScore = async () => {
+    if (atm) {
+      console.log(`newTeam ${team}, message: ${updatedScore}`);
+      let tx = await atm.updateScore(team, updatedScore, {
         from: account[0],
       });
       await tx.wait();
@@ -116,6 +127,9 @@ export default function HomePage() {
         `}
       </style>
       <div>
+        <br></br>
+        <hr></hr>
+        <br></br>
         Enter a Team Name:
         <input
           type="text"
@@ -132,7 +146,9 @@ export default function HomePage() {
           onChange={(e) => setnewScore(e.target.value)}
         />
         <br></br>
-        <button onClick={addATeam}>Send Message</button>
+        <button onClick={addATeam}>Add a Team</button>
+        <br></br>
+        <hr></hr>
         <br></br>
         Enter the Name of the Team to Check score
         <input
@@ -141,8 +157,29 @@ export default function HomePage() {
           value={team}
           onChange={(e) => setTeam(e.target.value)}
         />
-        <br></br>
         <button onClick={getScore}>Get Score</button>
+        {score !== undefined && <div>{score}</div>}
+        <br></br>
+        <hr></hr>
+        <br></br>
+        Enter the team name to update score
+        <input
+          type="text"
+          placeholder="Team Name"
+          value={team}
+          onChange={(e) => setTeam(e.target.value)}
+        />
+        <br></br>
+        Enter the score of that team to be updated:
+        <input
+          type="text"
+          placeholder="Score"
+          value={updatedScore}
+          onChange={(e) => setUpdatedScore(e.target.value)}
+        />
+        <br></br>
+        <button onClick={updateScore}>Update Score</button>
+        <hr></hr>
       </div>
     </main>
   );
